@@ -1332,12 +1332,15 @@ public class XmlPageWriter_Alto implements XmlPageWriter {
 			//Font Size
 			if (textObj.getAttributes().get("fontSize") != null && textObj.getAttributes().get("fontSize").getValue() != null)
 				fontSize = ((DoubleValue)textObj.getAttributes().get("fontSize").getValue()).val;
-			
+
 			//Font Colour (hex)
+			if (textObj.getAttributes().get("textColour") != null && textObj.getAttributes().get("textColour").getValue() != null) {
+				fontColor = getHexColor(textObj.getAttributes().get("textColour").getValue().toString());
+			}
+			
+			//Font Colour RGB (hex)
 			if (textObj.getAttributes().get("textColourRgb") != null && textObj.getAttributes().get("textColourRgb").getValue() != null) {
-				//TODO: 
-				// PAGE is integer (red value) + (256 x green value) + (65536 x blue value)
-				// ALTO is hex encoded RRGGBB
+				fontColor = getHexColor(Integer.parseInt(textObj.getAttributes().get("textColour").getValue().toString()));
 			}
 			
 			//Font style (bold, italics, subscript, superscript, smallcaps, underline)
@@ -1372,6 +1375,36 @@ public class XmlPageWriter_Alto implements XmlPageWriter {
 			
 			if (fontStyle.length() > 0)
 				this.fontStyle = fontStyle.toString();
+		}
+
+		public String getHexColor(String Color){
+			Map<String, String> HexColor = Stream.of(new String[][] {
+					{"black", "000000"},
+					{"blue", "0000ff"},
+					{"brown", "a52a2a"},
+					{"cyan", "00ffff"},
+					{"green", "008000"},
+					{"grey", "808080"},
+					{"indigo", "4b0082"},
+					{"magenta", "ff00ff"},
+					{"orange", "ffa500"},
+					{"pink", "ffc0cb"},
+					{"red", "ff0000"},
+					{"turquoise", "40e0d0"},
+					{"violet", "ee82ee"},
+					{"white", "ffffff"},
+					{"yellow", "ffff00"}
+			}).collect(Collectors.toMap(data -> data[0], data -> data[1]));
+
+			return HexColor.get(Color);
+		}
+
+		public String getHexColor(int Color){
+			String r = Integer.toHexString(Color % 256);
+			String g = Integer.toHexString((Color / 256) % 256);
+			String b = Integer.toHexString((Color / 256 / 256) % 256);
+
+			return String.format("%s%s%s", r, g, b);
 		}
 		
 		/** Returns true if no attribute is set */
