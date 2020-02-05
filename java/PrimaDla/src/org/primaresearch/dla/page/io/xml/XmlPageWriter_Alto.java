@@ -557,6 +557,11 @@ public class XmlPageWriter_Alto implements XmlPageWriter {
 		//TAGREFS
 		addTagRefs(blockNode, region);
 
+		//TextRegion Type TAGREFS
+		if (region instanceof TextRegion) {
+			addTypeTagRefs(blockNode, region);
+		}
+
 		//PROCESSINGREFS
 		// Not supported in PAGE
 
@@ -599,6 +604,20 @@ public class XmlPageWriter_Alto implements XmlPageWriter {
 			if (tagRefs.length() > 0)
 				addAttribute(parentNode, AltoXmlNames.ATTR_TAGREFS, tagRefs.toString());
 		}
+	}
+
+	private void addTypeTagRefs(Element parentNode, Region region){
+		StringBuilder tagRefs = new StringBuilder();
+
+		Tag tag = getTag((TextRegion)region);
+		if (tag != null && tag.label != null) {
+			if (tagRefs.length() > 0)
+				tagRefs.append(' ');
+			tagRefs.append(tag.ID);
+		}
+
+		if (tagRefs.length() > 0)
+			addAttribute(parentNode, AltoXmlNames.ATTR_TAGREFS, tagRefs.toString());
 	}
 	
 	Group findReadingOrderGroup(Group startGroup, Id regionId) {
@@ -701,7 +720,6 @@ public class XmlPageWriter_Alto implements XmlPageWriter {
 
 		//TAGREFS
 		addTagRefs(textLineNode, textLine);
-		
 		//TODO
 		//BASELINE
 		
@@ -1187,8 +1205,10 @@ public class XmlPageWriter_Alto implements XmlPageWriter {
 		
 		//Regions
 		for (int i=0; i<layout.getRegionCount(); i++) {
-			if (layout.getRegion(i) instanceof TextRegion)
-				findTags((TextRegion)layout.getRegion(i));			
+			if (layout.getRegion(i) instanceof TextRegion) {
+				findTags((TextRegion) layout.getRegion(i));
+				getTag((TextRegion)layout.getRegion(i));
+			}
 		}
 	}
 	
@@ -1251,6 +1271,26 @@ public class XmlPageWriter_Alto implements XmlPageWriter {
 			newTag.ID = "tag" + tags.size();
 			return newTag;
 		}		
+		return null;
+	}
+
+	private Tag getTag(TextRegion region) {
+		Tag newTag = new Tag(region);
+		//Look if already exists, otherwise add
+		for (Tag tag : tags) {
+			if (tag.equals(newTag))
+				return tag;
+		}
+
+		//Tag label is required!
+		if (!newTag.isEmpty() && newTag.label != null) {
+			System.out.println("Entered");
+			tags.add(newTag);
+			System.out.println("Created");
+			newTag.ID = "tag" + tags.size();
+			System.out.println(tags.size());
+			return newTag;
+		}
 		return null;
 	}
 	
@@ -1507,6 +1547,12 @@ public class XmlPageWriter_Alto implements XmlPageWriter {
 				description = label.getComments();
 			if (label.getExternalModel() != null && !label.getExternalModel().isEmpty())
 				uri = label.getExternalModel();
+		}
+
+		public Tag(Region region) {
+			if (region.getAttributes().get("type") != null && region.getAttributes().get("type").getValue() != null)
+				label = region.getAttributes().get("type").getValue().toString();
+			description="PAGE XML text region type";
 		}
 
 		/** Returns true if no attribute is set */
