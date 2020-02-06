@@ -4,6 +4,10 @@ prima-core-libs
 Core libraries by the PRImA Research Lab
 
 ## Branches
+* **master**
+
+Same codebase as [PRImA-Research-Lab:master](https://github.com/PRImA-Research-Lab/prima-core-libs). 
+
 * **[dev](https://github.com/maxnth/prima-core-libs/tree/dev)**
 
   dev branch for testing. Has the following branches merged
