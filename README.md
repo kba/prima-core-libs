@@ -77,7 +77,7 @@ Same codebase as [PRImA-Research-Lab:master](https://github.com/PRImA-Research-L
   ```
 * **[feature/TextRegionTypeTags](https://github.com/maxnth/prima-core-libs/tree/feature/TextRegionTypeTags)**
 
-Adds OtherTag-Elements for PAGE XML text region types
+  Adds OtherTag-Elements for PAGE XML text region types
 
   Example:
   ```xml
