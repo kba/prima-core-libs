@@ -35,7 +35,7 @@ Same codebase as [PRImA-Research-Lab:master](https://github.com/PRImA-Research-L
               <Polygon POINTS="719,427 770,427 770,462 719,462"/>
           </Shape>
       </Illustration>
-      <Illustration HEIGHT="50" HPOS="719" ID="r_0_1" TAGREFS="tag1" TYPE="ImageRegion"
+      <Illustration HEIGHT="50" HPOS="719" ID="r_0_2" TAGREFS="tag1" TYPE="ImageRegion"
           VPOS="427" WIDTH="52">
           <Shape>
               <Polygon POINTS="719,427 770,427 770,462 719,462"/>
@@ -51,7 +51,7 @@ Same codebase as [PRImA-Research-Lab:master](https://github.com/PRImA-Research-L
           …
       </ComposedBlock>
      …
-    <Illustration HEIGHT="80" HPOS="719" ID="r_0_1" TAGREFS="tag3" TYPE="MapRegion"
+    <Illustration HEIGHT="80" HPOS="719" ID="r_1_1" TAGREFS="tag3" TYPE="MapRegion"
           VPOS="427" WIDTH="52">
           <Shape>
               <Polygon POINTS="719,427 770,427 770,462 719,462"/>
