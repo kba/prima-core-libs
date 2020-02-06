@@ -18,7 +18,7 @@ Same codebase as [PRImA-Research-Lab:master](https://github.com/PRImA-Research-L
     * [stringMaps](https://github.com/maxnth/prima-core-libs/tree/stringMaps)
 * **[feature/AdvancedTags](https://github.com/maxnth/prima-core-libs/tree/feature/AdvancedTags)**
 
-  Experimental branch adding the LayoutTags proposed by [ALTO](https://altoxml.github.io/documentation/use-cases/tags/ALTO_tags_usecases.html
+  Experimental branch adding the LayoutTags proposed by [ALTO](https://altoxml.github.io/documentation/use-cases/tags/ALTO_tags_usecases.html)
   
   Example: 
   ```xml
